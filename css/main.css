@@ -1,0 +1,363 @@
+@font-face {
+  font-family: 'renner';
+  src: url('../fonts/renner.woff2') format('woff2'), url('../fonts/renner.woff') format('woff'), url('../fonts/renner.ttf') format('truetype');
+}
+/* DEFAULT */
+@media only screen {
+  * {
+    color: #000000;
+    font-family: "renner", 'TrebuchetMS', Helvetica, sans-serif;
+    font-size: 18px;
+    line-height: 1.6em;
+  }
+  a:hover, .cta a:hover, #mswd a:hover, #nav1 a:hover, #nav2 a:hover {
+    color: #0000FF;
+    text-decoration: underline;
+    text-decoration-color: #0000FF;
+  }
+  blockquote {
+    margin: 1em;
+  }
+  blockquote, .italic {
+    font-style: italic;
+  }
+  body {
+    background: #7EAED6;
+    border: 0;
+    font-size: 100%;
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+    width: 100%;
+  }
+  div, img, .zero {
+    border: 0;
+    margin: 0;
+    padding: 0;
+  }
+  footer {
+    justify-content: space-between;
+  }
+  footer, header, .content {
+    padding: 0 4%;
+  }
+  form {
+    margin: 0 1%;
+  }
+  h1 {
+    color: #005586;
+    font-size: 2em;
+    font-weight: bold;
+    margin: .8em 0 0 0;
+  }
+  .h1 {
+    color: #005586;
+    font-size: 2em;
+    font-weight: bold;
+    margin: .8em 0 0 0;
+  }
+  h2, .h2 {
+    color: #005586;
+    font-size: 1.6em;
+    font-weight: bold;
+    margin: .8em 0 0 0;
+  }
+  h3, .h3 {
+    color: #005586;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: .8em 0 0 0;
+  }
+  h4, .h4 {
+    color: #005586;
+    font-size: 1.1em;
+    font-weight: bold;
+    margin: .8em 0 0 0;
+  }
+  header {
+    justify-content: space-around;
+  }
+  header, #bg-white, #nav1 {
+    background-color: #FFFFFF;
+  }
+  header a, main a {
+    color: #9B2416;
+    font-weight: bold;
+  }
+  hr {
+    border: 2px solid #9B2416;
+    margin: 1em 0;
+    padding: 2px 0;
+  }
+  input, select, textarea {
+    background: #FFFFFF;
+    border: 1px solid #000000;
+    font-size: 1em;
+    margin: .5em;
+    padding: .5em;
+  }
+  label, .hidden {
+    display: none;
+  }
+  li {
+    color: #000000;
+    list-style-image: url('../images/li.png');
+    margin: 0 0 0 -16px;
+  }
+  main {
+    min-height: 70vh;
+  }
+  p {
+    color: #000000;
+    margin: 1em 0 .5em 0;
+  }
+  td, th {
+    color: #000000;
+    margin: .5em;
+  }
+  ul {
+    margin: 0;
+  }
+  video {
+    border: 3px solid #9B2416;
+    padding: 1px;
+  }
+  .center {
+    text-align: center;
+  }
+  footer, header, .content {
+    padding: 0 4%;
+  }
+  .a {
+    margin: 0 0 0 6px;
+  }
+  .flex {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .free {
+    color: #006A00;
+    font-weight: bold;
+  }
+  .justify {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
+  .larger {
+    font-size: 22px;
+  }
+  .left {
+    text-align: left;
+  }
+  .link {
+    padding: 0 1em;
+  }
+  .linkh3 {
+    color: #9B2416;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-decoration-color: #9B2416;
+  }
+  .noline {
+    text-decoration: none;
+  }
+  .pay {
+    height: 42px;
+    margin: 0 20px -8px 20px;
+    width: 42px;
+  }
+  .pdf {
+    height: 20px;
+    margin: 0 6px -4px 0;
+    width: 19px;
+  }
+  .right {
+    text-align: right;
+  }
+  .rt-arrow {
+    height: 18px;
+    margin: 0 0 -2px 2px;
+    width: 27px;
+  }
+  .social {
+    height: 32px;
+    margin: 0 20px;
+    width: 32px;
+  }
+  .strong {
+    font-weight: bold;
+  }
+  #adm {
+    position: relative;
+    bottom: 0;
+    height: 20px;
+    left: 0;
+    width: 40px;
+  }
+  #adm a {
+    color: #BCD6E9;
+    font-size: 16px;
+    text-decoration: none;
+  }
+  #adm-pic {
+    height: 20px;
+    width: 20px;
+  }
+  #backbutton, #submit {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  #bg-white {
+    padding: 4px 40px 40px 40px;
+  }
+  #footer-center {
+    text-align: center;
+  }
+  #footer-right {
+    text-align: right;
+  }
+  #header-right p {
+    text-align: center;
+  }
+  #i-email {
+    height: 24px;
+    margin: 0 10px -6px 0;
+    width: 31px;
+  }
+  #i-phone {
+    height: 26px;
+    margin: 0 10px -6px 0;
+    width: 26px;
+  }
+  #login {
+    border: 2px solid #9B2416;
+    font-weight: bold;
+    height: 29px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 4em;
+  }
+  #logo {
+    height: auto;
+    max-width: 500px;
+    width: 40vw;
+  }
+  #mswd {
+    margin: 0 40px 0 0;
+    text-align: right;
+  }
+  #mswd a {
+    color: #BCD6E9;
+    text-align: right;
+  }
+  #nav1 {
+    border-bottom: 1px solid #005586;
+    border-top: 1px solid #005586;
+    justify-content: space-around;
+  }
+  #nav1 p {
+    margin: 4px 10px;
+    text-align: center;
+  }
+  #nav1 a {
+    font-size: 24px;
+    text-decoration: none;
+  }
+  #up {
+    bottom: 120px;
+    height: 40px;
+    position: fixed;
+    right: 2px;
+    width: 40px;
+  }
+  #up-arrow {
+    height: 40px;
+    width: 40px;
+  }
+}
+/* MEGAPIXEL */
+@media only screen and (min-width: 2001px) {}
+/* DESKTOP */
+@media only screen and (max-width: 2000px) {}
+/* MOBILE */
+@media only screen and (max-width: 650px) {
+  footer, header {
+    flex-direction: column;
+  }
+  #bg-white {
+    padding: 2px 12px;
+  }
+  #footer-left, #footer-center, #footer-right {
+    text-align: center;
+    width: 100%;
+  }
+  #logo {
+    width: 60vw;
+  }
+}
+/* LARGE VIDEO */
+@media only screen and (min-width: 801px) {
+  .display-large {
+    margin: 20px 1px;
+    text-align: center;
+  }
+  .display-small {
+    display: none;
+  }
+}
+/* SMALL VIDEO */
+@media only screen and (min-width: 320px) and (max-width: 800px) {
+  .display-large {
+    display: none;
+  }
+  .display-small {
+    margin: 16px -10px;
+    text-align: center;
+  }
+}
+/* COLORS */
+.black {
+  color: #000000;
+}
+.blue {
+  color: #0000FF;
+}
+.blue-lt {
+  color: #92BBDC;
+}
+.blue-dk {
+  color: #005586;
+}
+.green {
+  color: #00B95B;
+}
+.red {
+  color: #9B2416;
+}
+.white {
+  color: #FFFFFF;
+}
+/* PRINT */
+@media print {
+  blockquote, caption, h1, h2, h3, h4, li, p, td, th {
+    font-family: 'Times New Roman', Times, serif;
+  }
+  blockquote, caption, li, p, td, th {
+    font-size: 12pt;
+    line-height: 15pt;
+  }
+  h1 {
+    font-size: 15pt;
+  }
+  h2 {
+    font-size: 14pt;
+  }
+  h3 {
+    font-size: 13pt;
+  }
+  h4 {
+    font-size: 12pt;
+  }
+}

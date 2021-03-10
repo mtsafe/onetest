@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+Disallow: /_notes/
+Disallow: /cgi-bin/
+Disallow: /error/
+Disallow: /fonts/
+Disallow: /login/
+Disallow: /Templates/
+
+Sitemap: https://onetestatatime.com/sitemap.xml

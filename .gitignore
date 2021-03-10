@@ -1,3 +1,6 @@
+# Video files are too large for GitHub
+videos/
+
 # Logs
 logs
 *.log

@@ -1,0 +1,177 @@
+# .htaccess file for onetestatatime.com - Last update 17 January 2021
+#
+<IfModule mod_headers.c>
+#
+# Specify several security-related headers in the page response
+  Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" env=HTTPS
+  Header always set Content-Security-Policy "upgrade-insecure-requests; \
+   base-uri https://onetestatatime.com; \
+   default-src https://onetestatatime.com https://www.google-analytics.com; \
+   font-src https://onetestatatime.com; \
+   form-action https://onetestatatime.com; \
+   frame-ancestors 'none'; \
+   frame-src https://www.google.com; \
+   img-src https://onetestatatime.com https://www.google-analytics.com https://www.googletagmanager.com https://ajax.googleapis.com; \
+   manifest-src https://onetestatatime.com; \
+   media-src https://onetestatatime.com; \
+   script-src https://onetestatatime.com https://cdn.ampproject.org https://www.googletagmanager.com https://www.google-analytics.com https://ajax.googleapis.com 'sha256-d5zd9aELCS9LtXIrD3lZf9oiTYJa30f6ZrMuXEhwcFw=' 'unsafe-inline'; \
+   style-src https://onetestatatime.com; \
+   worker-src 'none';"
+  Header always set X-Content-Type-Options nosniff
+  Header always set X-Frame-Options: deny
+  Header always set X-XSS-Protection "1; mode=block"
+  Header always set Referrer-Policy "same-origin"
+  Header always unset "X-Powered-By"
+# Feature-Policy: vibrate 'self'; usermedia *; sync-xhr 'self' https://example.com
+#
+# Specify encoding options for various filetypes
+  <FilesMatch "\.(css|docx|gif|ico|jpg|js|json|pdf|png|ttf|svg|woff|woff2|xml)$">
+	Header append Vary: Accept-Encoding
+  </FilesMatch>
+#
+# Specify options to force .pdf filetype to be downloaded rather than opened in browser
+  <FilesMatch "\.(pdf)$">
+	ForceType application/octet-stream
+	Header set Content-Disposition attachment
+  </FilesMatch>
+</IfModule>
+#
+Options -Indexes
+Options -MultiViews
+AddDefaultCharset UTF-8
+DefaultLanguage en
+AddLanguage en-US .html .css .js .php
+ServerSignature Off
+FileETag none
+#
+# MIME Types
+# Add MIME mappings for hosted fonts and enable embedded PHP in html files
+  <IfModule mod_mime.c>
+  	DefaultLanguage en
+    AddType font/woff2 woff2
+    AddType font/woff woff
+    AddType font/ttf ttf
+    AddType video/mp4 mp4
+    AddType application/javascript js
+    AddType application/json json map topojson
+	AddType application/atom+xml atom
+    AddType application/ld+json jsonld
+    AddType application/rss+xml rss
+    AddType application/geo+json geojson
+    AddType application/rdf+xml rdf
+    AddType application/xml xml
+  </IfModule>
+# Define custom error pages
+#
+ErrorDocument 400 /error/400page.html
+ErrorDocument 401 /error/401page.html
+ErrorDocument 403 /error/403page.html
+ErrorDocument 404 /error/404page.html
+ErrorDocument 500 /error/500page.html
+#
+# php -- BEGIN cPanel-generated handler, do not edit
+# Set the "ea-php73" package as the default "PHP" programming language.
+<IfModule mime_module>
+  AddHandler application/x-httpd-ea-php73 .php .php7 .phtml
+</IfModule>
+# php -- END cPanel-generated handler, do not edit
+#
+AddType application/x-httpd-ea-php73 html
+# php_value [setting name] [value]
+# php_value upload_max_filesize  10M
+#
+# Deny access to .htaccess
+  <Files .htaccess>
+    Order allow,deny
+    Deny from all
+  </Files>
+#
+  <Files 403.shtml>
+    order allow,deny
+    allow from all
+  </Files>
+#
+  IndexIgnore /_notes/*
+  IndexIgnore /cgi-bin/
+  IndexIgnore /error/*
+  IndexIgnore /includes/*
+  IndexIgnore /Templates/*
+#
+# Control caching via expiration date of various filetypes
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/png "access plus 1 month"
+  ExpiresByType image/gif "access plus 1 month"
+  ExpiresByType image/jpg "access plus 1 month"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType text/html "access plus 1 month"
+  ExpiresByType image/x-icon "access plus 1 month"
+  ExpiresByType text/javascript "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresDefault "access plus 1 month"
+</IfModule>
+#
+# Uncomment Header statement below to force no-caching for developmental purposes
+<IfModule mod_headers.c>
+  <FilesMatch "\.(css|docx|gif|html|ico|jpg|js|json|pdf|png|ttf|svg|woff|woff2|xml)$">
+#	Header set Cache-Control "max-age=0, public, must-revalidate, no-store"
+  </FilesMatch>
+</IfModule>
+#
+# Add deflate output filter for various filetypes
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html
+  AddOutputFilterByType DEFLATE text/css
+  AddOutputFilterByType DEFLATE text/javascript
+  AddOutputFilterByType DEFLATE text/xml
+  AddOutputFilterByType DEFLATE text/plain
+  AddOutputFilterByType DEFLATE image/x-icon
+  AddOutputFilterByType DEFLATE image/svg+xml
+  AddOutputFilterByType DEFLATE application/javascript
+  AddOutputFilterByType DEFLATE application/x-javascript
+  AddOutputFilterByType DEFLATE application/xml
+  AddOutputFilterByType DEFLATE application/xhtml+xml
+  AddOutputFilterByType DEFLATE application/x-font
+  AddOutputFilterByType DEFLATE application/x-font-truetype
+  AddOutputFilterByType DEFLATE application/x-font-ttf
+  AddOutputFilterByType DEFLATE application/x-font-otf
+  AddOutputFilterByType DEFLATE application/x-font-opentype
+  AddOutputFilterByType DEFLATE font/ttf
+  AddOutputFilterByType DEFLATE font/woff
+  AddOutputFilterByType DEFLATE font/woff2
+# For Olders Browsers Which Can't Handle Compression
+  BrowserMatch ^Mozilla/4 gzip-only-text/html
+  BrowserMatch ^Mozilla/4\.0[678] no-gzip
+  BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+</IfModule>
+#
+RewriteEngine on
+#
+# Redirect that allow pages to be served without an .html suffix
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteRule ^(.*)$ $1.html
+#
+# Redirect that allow pages to be served without an .php suffix
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php
+#
+RewriteCond %{HTTP_REFERER} ^http(s)?://(.*)?\.(ac|ad|ae|af|ag|ai|al|am|an|ao|aq|ar|as|at|aw|ax|az|ba|bb|bd|be|bf|bg|bh|bi|bj|bl|bm|bn|bo|br|bq|bs|bt|bv|bw|by|bz|cc|cd|cf|cg|ch|ci|ck|cl|cm|cn|co|cr|cs|cu|cv|cw|cx|cy|cz|dd|de|dj|dk|dm|do|dz|ec|ee|eg|eh|er|es|et|eu|fi|fj|fk|fm|fo|fr|ga|gd|ge|gf|gg|gh|gi|gl|gm|gn|gp|gq|gr|gs|gt|gu|gw|gy|hk|hm|hn|hr|ht|hu|id|ie|il|im|in|io|iq|ir|is|it|je|jm|jo|jp|ke|kg|kh|ki|km|kn|kp|kr|kw|ky|kz|la|lb|lc|li|lk|lr|ls|lt|lu|lv|ly|ma|mc|md|me|mf|mg|mh|mk|ml|mm|mn|mo|mp|mq|mr|ms|mt|mu|mv|mw|mx|my|mz|na|nc|ne|nf|ng|ni|nl|no|np|nr|nu|om|pa|pe|pf|pg|ph|pk|pl|pm|pn|pr|ps|pt|pw|py|qa|re|ro|rs|ru|rw|sa|sb|sc|sd|se|sg|sh|si|sj|sk|sl|sm|sn|so|sr|ss|st|su|sv|sx|sy|sz|tc|td|tf|tg|th|tj|tk|tl|tm|tn|to|tp|tr|tt|tv|tw|tz|ua|ug|uy|uz|va|vc|ve|vg|vi|vn|vu|wf|ws|ye|yt|yu|za|zm|zr|zw)(/.*)?$ [NC]
+RewriteRule .* – [F]
+#
+# Redirect http://onetestatatime.com & http://www.onetestatatime.com to https://onetestatatime.com
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP_HOST} ^(www\.)?onetestatatime\.com$ [NC]
+RewriteRule (.*) https://onetestatatime.com/$1 [R=301,L]
+#
+# Redirect https://www.onetestatatime.com to https://onetestatatime.com
+RewriteCond %{HTTPS} on
+RewriteCond %{HTTP_HOST} ^www.onetestatatime\.com$ [NC]
+RewriteRule ^(.*)$ https://onetestatatime.com/$1 [R=301,L]
+#
+# Disabling HTTP TRACE method to prevent cross site tracing
+RewriteCond %{REQUEST_METHOD} ^TRACE
+RewriteRule .* - [F]

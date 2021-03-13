@@ -1,3 +1,5 @@
+const dwt2pug = require('./dwt2pug.js');
+
 const express = require('express');
 const path = require('path');
 
@@ -40,13 +42,14 @@ app.get('/blog/list', (req, res) => {
 
 // Add a Blog Article
 app.get('/blog/add', (req, res) => {
+  dwt2pug('./Templates/main.dwt', './views/main.pug');
   res.render('add_article', {
     title: '1 Test - Add Blog Article'
   });
 });
 
 // Lastly, 404
-app.use((req, res, next) => {
+app.use((req, res) => {
 //  res.status(404).render('error/404page.html');
 // res.status(404).render('courses.html');
 res.status(404).sendFile(path.join(__dirname+'/public/error/404page.html'));

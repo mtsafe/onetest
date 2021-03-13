@@ -1,6 +1,5 @@
 {
   "devDependencies": {
-    "mongoose": "^5.11.19",
     "nodemon": "^2.0.7"
   },
   "name": "onetest",
@@ -14,11 +13,13 @@
     "core-util-is": "^1.0.2",
     "denque": "^1.5.0",
     "express": "^4.17.1",
+    "html2pug": "^4.0.0",
     "inherits": "^2.0.4",
     "isarray": "^1.0.0",
     "kareem": "^2.3.2",
     "memory-pager": "^1.5.0",
     "mongodb": "^3.6.4",
+    "mongoose": "^5.12.0",
     "mongoose-legacy-pluralize": "^1.0.2",
     "mpath": "^0.8.3",
     "mquery": "^3.2.4",

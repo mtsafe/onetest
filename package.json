@@ -37,7 +37,7 @@
     "util-deprecate": "^1.0.2"
   },
   "scripts": {
-    "dev": "nodemon -e js,pug",
+    "dev": "nodemon -e html,js,pug",
     "start": "node index",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

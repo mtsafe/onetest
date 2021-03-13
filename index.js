@@ -10,9 +10,8 @@ app.use('/', express.static('public'));
 app.set('views', path.join(__dirname,'views'));
 app.set('view engine', 'pug');
 
-
-// Home Route
-app.get('/articles/list', (req, res) => {
+// View the Blog List
+app.get('/blog/list', (req, res) => {
   let articles = [
     {
       id: 1,
@@ -34,18 +33,26 @@ app.get('/articles/list', (req, res) => {
     },
   ]
   res.render('index', {
-    title: 'Articles',
+    title: '1 Test - Blog Articles',
     articles: articles
   });
 });
 
-// Add Route
-app.get('/articles/add', (req, res) => {
+// Add a Blog Article
+app.get('/blog/add', (req, res) => {
   res.render('add_article', {
-    title: 'Add Article'
-  })
+    title: '1 Test - Add Blog Article'
+  });
 });
 
+// Lastly, 404
+app.use((req, res, next) => {
+//  res.status(404).render('error/404page.html');
+// res.status(404).render('courses.html');
+res.status(404).sendFile(path.join(__dirname+'/public/error/404page.html'));
+});
+
+// Start Express Listener for page requests
 app.listen(EXPRESS_PORT, () => {
   console.log(`Server started on port ${EXPRESS_PORT}...`)
 });

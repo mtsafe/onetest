@@ -85,9 +85,11 @@
   <div class="nav">
     <p class="nav-p"><a href="../courses.html" title="Online Diabetes Courses">Courses</a></p>
   </div>
+	<!--
   <div class="nav">
-    <p class="nav-p"><a href="../blog/list" title="Related Topics">Blog</a></p>
+    <p class="nav-p"><a href="../blog/index.php" title="Related Topics">Blog</a></p>
   </div>
+-->
   <div class="nav">
     <p class="nav-p"><a href="../contact.html" title="About Mary and her Contact Information">About</a></p>
   </div>

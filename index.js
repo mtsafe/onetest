@@ -1,22 +1,9 @@
-const dwt2pug = require('./dwt2pug.js');
-const express = require('express');
-const mongoose = require('mongoose');
-const path = require('path');
+const db = require('./config/db');
+const dwt2pug = require('./dwt2pug');
 const dotenv = require('dotenv');
+const express = require('express');
+const path = require('path');
 // const bodyParser = require('body-parser')
-
-mongoose.connect('mongodb://localhost/onetest');
-let db = mongoose.connection;
-
-// Check DB connection
-db.once('open', function(){
-  console.log('App connected to MongoDB');
-});
-
-// Check for DB errors
-db.on('error', function(){
-  console.log(err);
-})
 
 // Configuring the App
 dotenv.config({ path: './config/config.env'});
@@ -30,7 +17,7 @@ let Blog = require('./models/blog');
 // Declaring the Public directory for static HTML serving
 app.use('/', express.static('public'));
 
-// Load view Engine
+// Load Pug view Engine
 app.set('views', path.join(__dirname,'views'));
 app.set('view engine', 'pug');
 

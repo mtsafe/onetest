@@ -3,18 +3,18 @@ extends main
 block Content
   #bg-white
     h1 #{title}
-    form(method='POST', action='/blog/add', enctype='application/json')
+    form(method='POST', action='/blogs/add', enctype='application/json')
       fieldset
         .form-group
-          label(for='Title')
+          label(for='title')
           | Title:
-          input.form-control(name='Title', type='text')
+          input.form-control(name='title', type='text')
         .form-group
-          label(for='Author')
+          label(for='author')
           | Author:
-          input.form-control(name='Author', type='text')
+          input.form-control(name='author', type='text')
         .form-group
-          label(for='Body')
+          label(for='body')
           | Body:
-          textarea.form-control(name='Body', cols="30", rows="10")
+          textarea.form-control(name='body', cols="30", rows="10", type='text')
         input(type="submit", value="Submit")

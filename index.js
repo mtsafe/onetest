@@ -1,5 +1,4 @@
 const db = require('./config/db');
-const dwt2pug = require('./dwt2pug');
 const dotenv = require('dotenv');
 const express = require('express');
 const path = require('path');
@@ -10,9 +9,16 @@ dotenv.config({ path: './config/config.env'});
 const app = express();
 const EXPRESS_PORT = process.env.PORT || 3000;
 
-// Bring in Models
-let Blog = require('./models/blog');
-// const { config } = require('bluebird');
+// NOTICE: Be careful if you change
+// the order of app requests!
+
+// Body Parser Middleware
+// parse application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: true }));
+// parse application/json
+// Parse JSON bodies for this app. Make sure you put
+// `app.use(express.json())` **before** your route handlers!
+app.use(express.json());
 
 // Declaring the Public directory for static HTML serving
 app.use('/', express.static('public'));
@@ -21,42 +27,8 @@ app.use('/', express.static('public'));
 app.set('views', path.join(__dirname,'views'));
 app.set('view engine', 'pug');
 
-// Body Parser Middleware
-// parse application/x-www-form-urlencoded
-app.use(express.urlencoded());
-// parse application/json
-app.use(express.json());
-
-// View the Blog List
-app.get('/blog/list', (req, res) => {
-  Blog.find({}, (err, blogs) => {
-    if (err) {
-      console.log(err);
-      return;
-    }
-    res.render('list_blog', {
-      title: 'Blogs',
-      blogs: blogs
-    });
-  });
-});
-
-// Add a Blog Article
-app.get('/blog/add', (req, res) => {
-  dwt2pug('./Templates/main.dwt', './views/main.pug');
-  res.render('add_blog', {
-    title: 'Adding A Blog Article'
-  });
-});
-
-// Add Submit POST Route
-app.post('/blog/add', (req, res) => {
-//  let blog = new Blog();
-//  blog.title = req.body.title;
-  console.log(req.body.title);
-  res.end();
-});
-
+// Routes
+app.use('/blogs', require('./routes'));
 
 // Lastly, 404
 app.use((req, res) => {

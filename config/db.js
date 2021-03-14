@@ -1,6 +1,12 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/onetest');
+const mongo_connect_config = {
+//  autoIndex: false,
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false
+};
+mongoose.connect('mongodb://localhost/onetest',mongo_connect_config);
 let db = mongoose.connection;
 
 // Check DB connection

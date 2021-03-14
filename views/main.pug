@@ -14,6 +14,7 @@ html(lang='en-us')
 		meta(http-equiv='content-type', content='text/html; charset=UTF-8')
 		meta(name='viewport', content='width=device-width,initial-scale=1,shrink-to-fit=no,user-scalable=yes')
 		//  TemplateBeginEditable name="doctitle" 
+		block Doctitle
 		title 1 Test - 60 character total
 		//  TemplateEndEditable 
 		link(href='../css/main.css', rel='stylesheet', type='text/css')
@@ -57,6 +58,7 @@ html(lang='en-us')
 		meta(property='og:description', content='One Test at a Time Diabetic Coaching is here to coach Type 1 and Type 2 Diabetics to help meet their A1C goals, defeat burn out episodes, and help newly diagnosed diabetics through the complexities of this relentless disease.')
 		link(rel='help', href='../sitemap.html#help')
 		//  TemplateBeginEditable name="head" 
+		block Head
 		meta(name='description', content='160 characters')
 		link(rel='prev', href='index.html')
 		link(rel='next', href='services.html')
@@ -97,9 +99,7 @@ html(lang='en-us')
 					a(href='../contact.html', title='About Mary and her Contact Information') About
 		main.content
 			//  TemplateBeginEditable name="Content" 
-			#bg-white
-				h1 Heading 1 - 15 to 65 characters
-				p Content
+			block Content
 			//  TemplateEndEditable 
 		footer#footer.flex
 			#footer-left
@@ -151,4 +151,5 @@ html(lang='en-us')
 			script(src='../includes/1test-schema.js', crossorigin='anonymous')
 			script(src='../includes/touchscreen.js', crossorigin='anonymous')
 			//  TemplateBeginEditable name="Scripts" 
+			block Scripts
 			//  TemplateEndEditable 

@@ -34,8 +34,8 @@ app.get('/blog/list', (req, res) => {
       body: 'This is the article three body.'
     },
   ]
-  res.render('index', {
-    title: '1 Test - Blog Articles',
+  res.render('list_blog', {
+    title: 'Blog Article List',
     articles: articles
   });
 });
@@ -43,8 +43,8 @@ app.get('/blog/list', (req, res) => {
 // Add a Blog Article
 app.get('/blog/add', (req, res) => {
   dwt2pug('./Templates/main.dwt', './views/main.pug');
-  res.render('add_article', {
-    title: '1 Test - Add Blog Article'
+  res.render('add_blog', {
+    title: 'Adding A Blog Article'
   });
 });
 

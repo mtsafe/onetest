@@ -3,3 +3,18 @@ extends main
 block Content
   #bg-white
     h1 #{title}
+    form(method='POST', action='/blog/add', enctype='application/json')
+      fieldset
+        .form-group
+          label(for='Title')
+          | Title:
+          input.form-control(name='Title', type='text')
+        .form-group
+          label(for='Author')
+          | Author:
+          input.form-control(name='Author', type='text')
+        .form-group
+          label(for='Body')
+          | Body:
+          textarea.form-control(name='Body', cols="30", rows="10")
+        input(type="submit", value="Submit")

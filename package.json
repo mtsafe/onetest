@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "nodemon": "^2.0.7"
   },
   "name": "onetest",
@@ -12,12 +13,14 @@
     "bson": "^1.1.5",
     "core-util-is": "^1.0.2",
     "denque": "^1.5.0",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "html2pug": "^4.0.0",
     "inherits": "^2.0.4",
     "isarray": "^1.0.0",
     "kareem": "^2.3.2",
     "memory-pager": "^1.5.0",
+    "method-override": "^3.0.0",
     "mongodb": "^3.6.4",
     "mongoose": "^5.12.0",
     "mongoose-legacy-pluralize": "^1.0.2",
@@ -38,8 +41,8 @@
     "util-deprecate": "^1.0.2"
   },
   "scripts": {
-    "dev": "nodemon -e html,js,pug",
-    "start": "node index",
+    "dev": "cross-env NODE_ENV=development nodemon -e html,js,pug",
+    "start": "cross-env NODE_ENV=production node index",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

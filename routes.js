@@ -46,10 +46,9 @@ router.get('/add', (req, res) => {
 router.post('/add', (req, res) => {
   //  let blog = new Blog();
   //  blog.title = req.body.title;
-    console.log('POST to /blogs/add; FormData:'+req.body);
-    console.log('req.body.title = '+req.body.title);
-    res.json(req.body);
-//    res.end();
+    console.log('POST to /blogs/add; FormData:'+JSON.stringify(req.body));
+//    res.json(req.body);
+    res.end();
 });
 
 module.exports = router;

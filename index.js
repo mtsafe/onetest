@@ -12,6 +12,13 @@ const EXPRESS_PORT = process.env.PORT || 3000;
 // NOTICE: Be careful if you change
 // the order of app requests!
 
+// Declaring the Public directory for static HTML serving
+app.use('/', express.static('public'));
+
+// Load Pug view Engine
+app.set('views', path.join(__dirname,'views'));
+app.set('view engine', 'pug');
+
 // Body Parser Middleware
 // parse application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
@@ -19,13 +26,6 @@ app.use(express.urlencoded({ extended: true }));
 // Parse JSON bodies for this app. Make sure you put
 // `app.use(express.json())` **before** your route handlers!
 app.use(express.json());
-
-// Declaring the Public directory for static HTML serving
-app.use('/', express.static('public'));
-
-// Load Pug view Engine
-app.set('views', path.join(__dirname,'views'));
-app.set('view engine', 'pug');
 
 // Routes
 app.use('/blogs', require('./routes'));

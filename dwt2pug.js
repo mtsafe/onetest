@@ -1,9 +1,15 @@
 const html2pug = require('html2pug');
 
-const html = '<header><h1 class="title">Hello World!</h1></header>'
-const pug = html2pug(html, { tabs: true })
+const fs = require('fs');
+const fsPromises = fs.promises;
 
-const fs = require('fs')
+function toTitleCase(str) {
+  const regex = /\w\S*/g;
+  return str.replace(regex, txt => {
+      return txt.charAt(0).toUpperCase() +
+        txt.substr(1).toLowerCase();
+  });
+}
 
 function html2pugWorkaround(pug) {
   // The following code works around a bug in html2pug
@@ -21,9 +27,37 @@ function html2pugWorkaround(pug) {
   return pugOut.join('\n');
 }
 
+function insertPugBlocks(pug) {
+  const pugOut = pug.split('\n');
+  const regexA = /\/\/  TemplateBeginEditable name\=/;
+  const regexB = /"(.*?)"/;
+  const regexC = /\/\/  TemplateEndEditable/;
+  let block;
+  let indention = '';
+  let blockName = '';
+  for (let indx = 0; indx < pugOut.length; indx++) {
+    if (regexA.test(pugOut[indx])) {
+      block = pugOut[indx];
+      indention = block.slice(0,block.search(regexA));
+      block = block.match(regexB);
+      blockName = block[1];
+      pugOut[indx] += '\n' + indention + 'block ' +
+        toTitleCase(blockName);
+      // replace Content block
+      if (blockName === 'Content') {
+        indx++;
+        while (!regexC.test(pugOut[indx])) {
+          pugOut.splice(indx, 1);
+        }
+      }
+    }
+  }
+  return pugOut.join('\n');
+}
+
 module.exports = function (dwtFilePath, pugFilePath) {
   try {
-    if (!fs.existsSync(dwtFilePath)) {
+    if (!fsPromises.access(dwtFilePath, fs.constants.R_OK)) {
       console.log(`Missing file ${dwtFilePath}`);
       return;
     }
@@ -38,8 +72,11 @@ module.exports = function (dwtFilePath, pugFilePath) {
     fs.readFile(dwtFilePath, 'utf8', (err, data) => {
       if (err) throw err;
       let pug = html2pug(data, { tabs: true });
-      console.log('html2pug executed');
+      console.log('html2pug completed');
       pug = html2pugWorkaround(pug);
+      console.log('html2pugWorkaround completed');
+      pug = insertPugBlocks(pug);
+      console.log('insertPugBlocks completed');
       try {
         fs.writeFile(pugFilePath, pug, 'utf8', (err) => {
           if (err) throw err;
@@ -56,4 +93,5 @@ module.exports = function (dwtFilePath, pugFilePath) {
     console.error(err);
     return;
   }
+  console.log(`Template file ${dwtFilePath} converted.`);
 }

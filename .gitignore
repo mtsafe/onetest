@@ -1,8 +1,8 @@
 # Video files are too large for GitHub
-/public/videos/
+public/videos/
 
 # main.pug is runtime generated from main.dwt
-/views/main.pug
+views/main.pug
 
 # Logs
 logs

@@ -33,6 +33,28 @@ router.get('/list', (req, res) => {
   });
 });
 
+// View a single Blog post
+router.get('/:id', (req, res) => {
+  console.log('GET to /blogs/:id');
+  let ID = req.params.id;
+  Blog.findById(ID, (err, blog) => {
+    if (!ID.match(/^[0-9a-fA-F]{24}$/)) {
+      console.log(`"${ID}" invalid ObjectId, cannot findById`);
+    }
+    if (err) {
+      console.log(err);
+      return;
+    }
+    // console.log(blog);
+    res.render('view_blog', {
+      title: 'Blog',
+      blog_title: blog.title,
+      blog_author: blog.author,
+      blog_body: blog.body
+    });
+  });
+});
+
 // Add a Blog Article
 router.get('/add', (req, res) => {
   console.log('GET to /blogs/add');

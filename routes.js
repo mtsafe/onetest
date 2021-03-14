@@ -44,11 +44,21 @@ router.get('/add', (req, res) => {
 
 // Submit POST blog Route
 router.post('/add', (req, res) => {
-  //  let blog = new Blog();
-  //  blog.title = req.body.title;
-    console.log('POST to /blogs/add; FormData:'+JSON.stringify(req.body));
-//    res.json(req.body);
-    res.end();
+  console.log('POST to /blogs/add; FormData:'+JSON.stringify(req.body));
+  let blog = new Blog();
+  blog.title = req.body.title;
+  blog.author = req.body.author;
+  blog.body = req.body.body;
+
+  blog.save(err => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    res.redirect('/blogs/list');
+  //    res.json(req.body);
+  //  res.end();
+  });
 });
 
 module.exports = router;

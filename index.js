@@ -1,11 +1,29 @@
 const dwt2pug = require('./dwt2pug.js');
-
 const express = require('express');
+const mongoose = require('mongoose');
 const path = require('path');
 
+mongoose.connect('mongodb://localhost/onetest');
+let db = mongoose.connection;
+
+// Check DB connection
+db.once('open', function(){
+  console.log('App connected to MongoDB');
+});
+
+// Check for DB errors
+db.on('error', function(){
+  console.log(err);
+})
+
+// Initializing the App
 const app = express();
 const EXPRESS_PORT = 3000;
 
+// Bring in Models
+let Blog = require('./models/blog');
+
+// Declaring the Public directory for static HTML serving
 app.use('/', express.static('public'));
 
 // Load view Engine
@@ -14,30 +32,40 @@ app.set('view engine', 'pug');
 
 // View the Blog List
 app.get('/blog/list', (req, res) => {
-  let articles = [
-    {
-      id: 1,
-      title: 'Article One',
-      author: 'Brad T',
-      body: 'This is the article one body.'
-    },
-    {
-      id: 2,
-      title: 'Article Two',
-      author: 'Brad T',
-      body: 'This is the article two body.'
-    },
-    {
-      id: 3,
-      title: 'Article Three',
-      author: 'Brad T',
-      body: 'This is the article three body.'
-    },
-  ]
-  res.render('list_blog', {
-    title: 'Blog Article List',
-    articles: articles
+  Blog.find({}, (err, blogs) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    res.render('list_blog', {
+      title: 'Blogs',
+      blogs: blogs
+    });
   });
+  // let articles = [
+  //   {
+  //     id: 1,
+  //     title: 'Article One',
+  //     author: 'Brad T',
+  //     body: 'This is the article one body.'
+  //   },
+  //   {
+  //     id: 2,
+  //     title: 'Article Two',
+  //     author: 'Brad T',
+  //     body: 'This is the article two body.'
+  //   },
+  //   {
+  //     id: 3,
+  //     title: 'Article Three',
+  //     author: 'Brad T',
+  //     body: 'This is the article three body.'
+  //   },
+  // ]
+  // res.render('list_blog', {
+  //   title: 'Blog Article List',
+  //   articles: articles
+  // });
 });
 
 // Add a Blog Article

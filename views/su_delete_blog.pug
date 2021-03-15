@@ -1,0 +1,16 @@
+extends main
+
+block Content
+  #bg-white
+    h3 Are you sure you want to delete this blog post?
+    form(method='GET', action='/blogs/list', enctype='application/json')
+      input(type="submit", value="Keep It")
+    form(method='POST', action='/blogs/delete:'+blog._id, enctype='application/json')
+      input(type="hidden", name="_method", value="PUT")
+      input(type="submit", value="Delete It")
+    hr
+    h1= page_title
+    h2= blog.title
+    | Written by #{blog.author}
+    hr
+    p= blog.body

@@ -1,0 +1,22 @@
+extends main
+
+block Content
+  #bg-white
+    h1= page_title+": "+blog.title
+    form(method='POST', action='/blogs/edit:'+blog._id, enctype='application/json')
+      input(type="hidden", name="_method", value="PUT")
+      fieldset
+        .form-group
+          label(for='title')
+          | Title:
+          input.form-control(name='title', type='text', value=blog.title)
+        .form-group
+          label(for='author')
+          | Author:
+          input.form-control(name='author', type='text', value=blog.author)
+        .form-group
+          label(for='body')
+          | Body:
+          textarea.form-control(name='body', cols="30", rows="10", type='text')= blog.body
+        br
+        input(type="submit", value="Submit")

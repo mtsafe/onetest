@@ -2,7 +2,7 @@ extends main
 
 block Content
   #bg-white
-    h1= title
+    h1 #{page_title}
       ul.list-group
         each blog, i in blogs
           li.list-group-item

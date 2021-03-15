@@ -2,8 +2,8 @@ extends main
 
 block Content
   #bg-white
-    h1= blog_title
-    | by 
-    span= blog_author
+    h1= page_title
+    h2= blog.title
+    | Written by #{blog.author}
     hr
-    p= blog_body
+    p= blog.body

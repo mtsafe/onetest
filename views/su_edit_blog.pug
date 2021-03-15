@@ -1,20 +1,21 @@
+
 extends main
 
 block Content
   #bg-white
-    h1 #{title}
-    form(method='POST', action='/blogs/add', enctype='application/json')
+    h1= page_title
+    form(method='POST', action='/blogs/edit/'+blog._id, enctype='application/json')
       fieldset
         .form-group
           label(for='title')
           | Title:
-          input.form-control(name='title', type='text')
+          input.form-control(name='title', type='text', value=blog.title)
         .form-group
-          label(for='author')
+          label(for='author', value=blog.author)
           | Author:
           input.form-control(name='author', type='text')
         .form-group
           label(for='body')
           | Body:
-          textarea.form-control(name='body', cols="30", rows="10", type='text')
+          textarea.form-control(name='body', cols="30", rows="10", type='text', value=blog.body)
         input(type="submit", value="Submit")

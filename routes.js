@@ -35,9 +35,9 @@ router.get('/list', (req, res) => {
 });
 
 // View a single Blog post
-router.get('/:id', (req, res) => {
-  let ID = req.params.id;
-  console.log('GET to /blogs/:id _id='+ID);
+router.get('/view:id', (req, res) => {
+  let ID = req.params.id.substring(1);
+  console.log('GET to /blogs/view:id _id='+ID);
   if (!ID.match(/^[0-9a-fA-F]{24}$/)) {
     console.log(`"${ID}" invalid ObjectId, cannot findById`);
     console.log(`Sending 404: ${path.join(__dirname+"/public/error/404page.html")}`);
@@ -67,9 +67,9 @@ router.get('/add', (req, res) => {
 });
 
 // Edit a single Blog post
-router.get('/edit/:id', (req, res) => {
-  console.log('GET to /blogs/edit/:id');
-  let ID = req.params.id;
+router.get('/edit:id', (req, res) => {
+  let ID = req.params.id.substring(1);
+  console.log('GET to /blogs/edit:id');
   Blog.findById(ID, (err, blog) => {
     if (!ID.match(/^[0-9a-fA-F]{24}$/)) {
       console.log(`"${ID}" invalid ObjectId, cannot findById`);
@@ -86,7 +86,7 @@ router.get('/edit/:id', (req, res) => {
   });
 });
 
-// Submit POST blog Route
+// Submit POST added blog Route
 router.post('/add', (req, res) => {
   console.log('POST to /blogs/add; FormData:'+JSON.stringify(req.body));
   let blog = new Blog();
@@ -95,6 +95,28 @@ router.post('/add', (req, res) => {
   blog.body = req.body.body;
 
   blog.save(err => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    res.redirect('/blogs/list');
+  //    res.json(req.body);
+  //  res.end();
+  });
+});
+
+// Submit POST edited blog Route
+router.post('/edit:id', (req, res) => {
+  let ID = req.params.id.substring(1);
+  console.log('POST to /blogs/edit:id; FormData:'+JSON.stringify(req.body));
+  let blog = {};
+  blog.title = req.body.title;
+  blog.author = req.body.author;
+  blog.body = req.body.body;
+
+  let query = {_id:ID}
+
+  Blog.updateOne(query, blog, err => {
     if (err) {
       console.log(err);
       return;

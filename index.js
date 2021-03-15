@@ -32,9 +32,8 @@ app.use('/blogs', require('./routes'));
 
 // Lastly, 404
 app.use((req, res) => {
-//  res.status(404).render('error/404page.html');
-// res.status(404).render('courses.html');
-res.status(404).sendFile(path.join(__dirname+'/public/error/404page.html'));
+  console.log("404: "+path.join(__dirname+'/public/error/404page.html'));
+  res.status(404).sendFile(path.join(__dirname+'/public/error/404page.html'));
 });
 
 // Start Express Listener for page requests

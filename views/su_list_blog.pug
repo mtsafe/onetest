@@ -5,5 +5,8 @@ block Content
     h1 #{page_title}
       ul.list-group
         each blog, i in blogs
-          li.list-group-item
-            a(href="/blogs/"+blog._id)= blog.title
+          li.list-group-item click to view:
+            a(href="/blogs/view:"+blog._id)= blog.title
+            | OR here to edit:
+            a(href="/blogs/edit:"+blog._id)= blog.title
+

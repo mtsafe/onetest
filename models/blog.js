@@ -16,4 +16,4 @@ let blogSchema = mongoose.Schema({
   }
 });
 
-let Blog = module.exports = mongoose.model('Blog', blogSchema);
+module.exports = mongoose.model('Blog', blogSchema);

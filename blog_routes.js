@@ -3,8 +3,24 @@ const router = express.Router();
 const path = require('path');
 const dwt2pug = require('./dwt2pug');
 
+function whereAmI(calling, {url, originalUrl, baseUrl, path}) {
+  console.dir(calling);
+  console.dir("req.url = "+url); // '/new?sort=desc'
+  console.dir("req.originalUrl = "+originalUrl); // '/admin/new?sort=desc'
+  console.dir("req.baseUrl = "+baseUrl); // '/admin'
+  console.dir("req.path = "+path); // '/new'
+}
+
+// Restore the mount point into the url
+router.use('/', (req, res, next) => {
+  req.baseUrl = '/';
+  req.url = req.originalUrl;
+  // whereAmI("New Location?", req);
+  next()
+});
+
 // Landing page
-router.get('/1taat_login', (req,res) => {
+router.get('/blogs/1taat_login', (req,res) => {
   console.log('GET to /blogs/1taat_login');
   res.render('su_login');
 });
@@ -20,7 +36,7 @@ let Blog = require('./models/blog');
 // const { config } = require('bluebird');
 
 // View the Blog List
-router.get('/list', (req, res) => {
+router.get('/blogs/list', (req, res) => {
   console.log('GET to /blogs/list');
   Blog.find({}, (err, blogs) => {
     if (err) {
@@ -43,7 +59,7 @@ router.get('/list', (req, res) => {
 });
 
 // View a single Blog post
-router.get('/view:id', (req, res) => {
+router.get('/blogs/view:id', (req, res) => {
   let ID = req.params.id.substring(1);
   console.log('GET to /blogs/view:id _id='+ID);
   if (!ID.match(/^[0-9a-fA-F]{24}$/)) {
@@ -66,7 +82,7 @@ router.get('/view:id', (req, res) => {
 });
 
 // Delete a single Blog post
-router.get('/delete:id', (req, res) => {
+router.get('/blogs/delete:id', (req, res) => {
   let ID = req.params.id.substring(1);
   console.log('GET to /blogs/delete:id _id='+ID);
   let isUserLoggedIn = true;
@@ -96,7 +112,7 @@ router.get('/delete:id', (req, res) => {
 });
 
 // Add a Blog Article
-router.get('/add', (req, res) => {
+router.get('/blogs/add', (req, res) => {
   console.log('GET to /blogs/add');
   let isUserLoggedIn = true;
   if (!isUserLoggedIn) {
@@ -112,7 +128,7 @@ router.get('/add', (req, res) => {
 });
 
 // Edit a single Blog post
-router.get('/edit:id', (req, res) => {
+router.get('/blogs/edit:id', (req, res) => {
   let ID = req.params.id.substring(1);
   console.log('GET to /blogs/edit:id');
   let isUserLoggedIn = true;
@@ -139,7 +155,7 @@ router.get('/edit:id', (req, res) => {
 });
 
 // Submit POST added blog Route
-router.post('/add', (req, res) => {
+router.post('/blogs/add', (req, res) => {
   console.log('POST to /blogs/add; FormData:'+JSON.stringify(req.body));
   let isUserLoggedIn = true;
   if (!isUserLoggedIn) {
@@ -165,7 +181,7 @@ router.post('/add', (req, res) => {
 });
 
 // Submit POST edited blog Route
-router.post('/edit:id', (req, res) => {
+router.post('/blogs/edit:id', (req, res) => {
   let ID = req.params.id.substring(1);
   console.log('POST to /blogs/edit:id; FormData:'+JSON.stringify(req.body));
   let isUserLoggedIn = true;
@@ -194,7 +210,7 @@ router.post('/edit:id', (req, res) => {
 });
 
 // Submit POST to delete blog Route
-router.delete('/delete:id', (req, res) => {
+router.delete('/blogs/delete:id', (req, res) => {
   let ID = req.params.id.substring(1);
   console.log('POST to /blogs/delete:id; FormData:'+JSON.stringify(req.body));
   let isUserLoggedIn = true;

@@ -39,7 +39,7 @@ app.use(methodOverride(function (req, res) {
 }))
 
 // Routes
-app.use('/blogs', require('./routes'));
+app.use('/blogs', require('./blog_routes'));
 
 // Lastly, 404
 app.use((req, res) => {

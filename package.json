@@ -7,6 +7,7 @@
   "description": "One Test at a Time - Your Personal Diabetes Coach",
   "version": "1.0.0",
   "main": "index.js",
+  "jest": {},
   "dependencies": {
     "bl": "^2.2.1",
     "bluebird": "^3.5.1",

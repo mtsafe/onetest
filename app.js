@@ -8,7 +8,6 @@ const path = require('path');
 // Configuring the App
 dotenv.config({ path: './config/config.env'});
 const app = express();
-const EXPRESS_PORT = process.env.PORT || 3000;
 
 // NOTICE: Be careful if you change
 // the order of app requests!
@@ -36,7 +35,7 @@ app.use(methodOverride(function (req, res) {
     delete req.body._method
     return method
   }
-}))
+}));
 
 // Routes
 app.use('/blogs', require('./blog_routes'));
@@ -47,7 +46,4 @@ app.use((req, res) => {
   res.status(404).sendFile(path.join(__dirname+'/public/error/404page.html'));
 });
 
-// Start Express Listener for page requests
-app.listen(EXPRESS_PORT, () => {
-  console.log(`Server started in ${process.env.NODE_ENV} on port ${EXPRESS_PORT}...`)
-});
+module.exports = app;

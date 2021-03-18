@@ -6,7 +6,7 @@
   "name": "onetest",
   "description": "One Test at a Time - Your Personal Diabetes Coach",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "jest": {},
   "dependencies": {
     "bl": "^2.2.1",
@@ -43,7 +43,7 @@
   },
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon -e html,js,pug",
-    "start": "cross-env NODE_ENV=production node index",
+    "start": "cross-env NODE_ENV=production node",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

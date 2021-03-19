@@ -38,22 +38,21 @@ let Blog = require('./models/blog');
 * -- Public Requests or Private Requests for Forms --
 * 1 GET     /blogs        Provide the listing of all blogs
 * -- Public Requests --
-* 2 GET     /blogs/:id    Provide a single blog document
+* 2 GET     /blogs/api:id    Provide a single blog document
 * -- Private Action Requests --
 * 3 POST    /blogs        Add a new blog document
-* 4 PUT     /blogs/:id    Update a single blog document
-* 5 DELETE  /blogs/:id    Delete a single blog document
+* 4 PUT     /blogs/api:id    Update a single blog document
+* 5 DELETE  /blogs/api:id    Delete a single blog document
 * -- Private Requests for Forms --
 * 6 GET     /blogs/1taat_login_form   Display the form to login
 * 7 GET     /blogs/1taat_add_form     Display the form to add a new blog
-* 8 GET     /blogs/1taat_edit_form    Display the form to update a blog
-* 9 GET     /blogs/1taat_delete_form  Display the form to delete a blog
+* 8 GET     /blogs/1taat_edit_form:id    Display the form to update a blog
+* 9 GET     /blogs/1taat_delete_form:id  Display the form to delete a blog
 */
 
 // 1 Provide the listing of all blogs
 router.get('/blogs', (req, res) => {
-  console.log('GET to /blogs');
-  console.log('GET to url='+req.url);
+  console.log('1. GET to '+req.url);
   Blog.find({}, (err, blogs) => {
     if (err) {
       console.log(err);
@@ -75,9 +74,9 @@ router.get('/blogs', (req, res) => {
 });
 
 // 2 Provide a single blog document
-router.get('/blogs/:id', (req, res) => {
+router.get('/blogs/api:id', (req, res) => {
   let ID = req.params.id.substring(1);
-  console.log('GET to /blogs/:id _id='+ID);
+  console.log('2. GET to '+req.url);
   if (!ID.match(/^[0-9a-fA-F]{24}$/)) {
     console.log(`"${ID}" invalid ObjectId, cannot findById`);
     console.log(`Sending 404: ${path.join(__dirname+"/public/error/404page.html")}`);
@@ -99,7 +98,7 @@ router.get('/blogs/:id', (req, res) => {
 
 // 3 Add a new blog document
 router.post('/blogs', (req, res) => {
-  console.log('POST to /blogs; FormData:'+JSON.stringify(req.body));
+  console.log(`3. POST to ${req.url}; FormData:`+JSON.stringify(req.body));
   let isUserLoggedIn = true;
   if (!isUserLoggedIn) {
     // post an alert
@@ -124,9 +123,9 @@ router.post('/blogs', (req, res) => {
 });
 
 // 4 Update a single blog document
-router.post('/blogs/:id', (req, res) => {
+router.put('/blogs/api:id', (req, res) => {
   let ID = req.params.id.substring(1);
-  console.log('POST to /blogs/:id; FormData:'+JSON.stringify(req.body));
+  console.log(`4. PUT to ${req.url}; FormData:`+JSON.stringify(req.body));
   let isUserLoggedIn = true;
   if (!isUserLoggedIn) {
     // post an alert
@@ -153,9 +152,9 @@ router.post('/blogs/:id', (req, res) => {
 });
 
 // 5 Delete a single blog document
-router.delete('/blogs/:id', (req, res) => {
+router.delete('/blogs/api:id', (req, res) => {
   let ID = req.params.id.substring(1);
-  console.log('POST to /blogs/:id; FormData:'+JSON.stringify(req.body));
+  console.log(`5. DELETE to ${req.url}; FormData:`+JSON.stringify(req.body));
   let isUserLoggedIn = true;
   if (!isUserLoggedIn) {
     // post an alert
@@ -183,13 +182,13 @@ router.delete('/blogs/:id', (req, res) => {
 
 // 6 Display the form to login
 router.get('/blogs/1taat_login_form', (req,res) => {
-  console.log('GET to /blogs/1taat_login');
+  console.log('6. GET to '+req.url);
   res.render('su_login');
 });
 
 // 7 Display the form to add a new blog
 router.get('/blogs/1taat_add_form', (req, res) => {
-  console.log('GET to /blogs/1taat_add_form');
+  console.log('7. GET to '+req.url);
   let isUserLoggedIn = true;
   if (!isUserLoggedIn) {
     // post an alert
@@ -204,9 +203,9 @@ router.get('/blogs/1taat_add_form', (req, res) => {
 });
 
 // 8 Display the form to update a blog
-router.get('/blogs/1taat_edit_form', (req, res) => {
+router.get('/blogs/1taat_edit_form:id', (req, res) => {
+  console.log('8. GET to '+req.url);
   let ID = req.params.id.substring(1);
-  console.log('GET to /blogs/1taat_edit_form');
   let isUserLoggedIn = true;
   if (!isUserLoggedIn) {
     // post an alert
@@ -231,9 +230,9 @@ router.get('/blogs/1taat_edit_form', (req, res) => {
 });
 
 // 9 Display the form to delete a blog
-router.get('/blogs/1taat_delete_form', (req, res) => {
+router.get('/blogs/1taat_delete_form:id', (req, res) => {
+  console.log('9. GET to '+req.url);
   let ID = req.params.id.substring(1);
-  console.log('GET to /blogs/1taat_delete_form:id _id='+ID);
   let isUserLoggedIn = true;
   if (!isUserLoggedIn) {
     // post an alert

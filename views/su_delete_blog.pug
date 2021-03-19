@@ -3,10 +3,10 @@ extends main
 block Content
   #bg-white
     h3 Are you sure you want to delete this blog post?
-    form(method='GET', action='/blogs/list', enctype='application/json')
+    form(method='GET', action='/blogs', enctype='application/json')
       input(type="submit", value="Keep It")
-    form(method='POST', action='/blogs/delete:'+blog._id, enctype='application/json')
-      input(type="hidden", name="_method", value="PUT")
+    form(method='POST', action='/blogs/:'+blog._id, enctype='application/json')
+      input(type="hidden", name="_method", value="DELETE")
       input(type="submit", value="Delete It")
     hr
     h1= page_title

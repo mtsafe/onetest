@@ -86,7 +86,7 @@
     <p class="nav-p"><a href="../courses.html" title="Online Diabetes Courses">Courses</a></p>
   </div>
   <div class="nav">
-    <p class="nav-p"><a href="../blogs/list" title="Related Topics">Blog</a></p>
+    <p class="nav-p"><a href="../blogs" title="Related Topics">Blog</a></p>
   </div>
   <div class="nav">
     <p class="nav-p"><a href="../contact.html" title="About Mary and her Contact Information">About</a></p>
@@ -124,7 +124,7 @@
 </div>
 -->
 <div id="adm">
-  <p class="zero"><a class="a" href="../blog/textpattern/index.php" rel="nofollow" title="blog" target="_blank">@</a> <a class="a" href="../login/users/login.php" rel="nofollow" title="users" target="_blank">#</a></p>
+  <p class="zero"><a class="a" href="../blogs" rel="nofollow" title="blog" target="_blank">@</a> <a class="a" href="../blogs/1taat_login_form" rel="nofollow" title="users" target="_blank">#</a></p>
 </div>
 <div id="up">
   <p class="zero"><a href="#top" title="Top of Page"><img id="up-arrow" src="../images/top.png" alt="Top of Page"></a></p>

@@ -6,8 +6,6 @@ block Content
       ul.list-group
         each blog, i in blogs
           li.list-group-item #{blog.title} click to 
-            a(href="/blogs/view:"+blog._id) VIEW: 
+            a(href="/blogs/:"+blog._id) VIEW / EDIT: 
             | OR here to 
-            a(href="/blogs/edit:"+blog._id) EDIT: 
-            | OR here to 
-            a(href="/blogs/delete:"+blog._id) DELETE:
+            a(href="/blogs/1taat_delete_form/:"+blog._id) DELETE:

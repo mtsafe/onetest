@@ -3,7 +3,7 @@ extends main
 block Content
   #bg-white
     h1= page_title
-    form(method='POST', action='/blogs/add', enctype='application/json')
+    form(method='POST', action='/blogs', enctype='application/json')
       fieldset
         .form-group
           label(for='title')

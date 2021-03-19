@@ -6,4 +6,4 @@ block Content
       ul.list-group
         each blog, i in blogs
           li.list-group-item
-            a(href="/blogs/view:"+blog._id)= blog.title
+            a(href="/blogs/:"+blog._id)= blog.title

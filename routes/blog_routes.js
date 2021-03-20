@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path');
-const dwt2pug = require('./dwt2pug');
+const dwt2pug = require('../services/dwt2pug.service');
 
 /*
 function whereAmI(calling, {url, originalUrl, baseUrl, path}) {
@@ -28,7 +28,7 @@ router.use('/', (req, res, next) => {
 // });
 
 // Bring in DB Models
-let Blog = require('./models/blog');
+let Blog = require('../models/blog.db');
 // const { config } = require('bluebird');
 
 /*

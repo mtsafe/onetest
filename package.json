@@ -1,13 +1,23 @@
 {
-  "devDependencies": {
-    "cross-env": "^7.0.3",
-    "nodemon": "^2.0.7"
-  },
   "name": "onetest",
   "description": "One Test at a Time - Your Personal Diabetes Coach",
   "version": "1.0.0",
   "main": "server.js",
-  "jest": {},
+  "author": "Albir Tarsha",
+  "license": "ISC",
+  "homepage": "https://github.com/mtsafe/onetest#readme",
+  "bugs": {
+    "url": "https://github.com/mtsafe/onetest/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mtsafe/onetest.git"
+  },
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development nodemon -e html,js,pug",
+    "start": "cross-env NODE_ENV=production node",
+    "test": "jest --config=./config/jest.config.js"
+  },
   "dependencies": {
     "bl": "^2.2.1",
     "bluebird": "^3.5.1",
@@ -41,19 +51,9 @@
     "string_decoder": "^1.1.1",
     "util-deprecate": "^1.0.2"
   },
-  "scripts": {
-    "dev": "cross-env NODE_ENV=development nodemon -e html,js,pug",
-    "start": "cross-env NODE_ENV=production node",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mtsafe/onetest.git"
-  },
-  "author": "Albir Tarsha",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/mtsafe/onetest/issues"
-  },
-  "homepage": "https://github.com/mtsafe/onetest#readme"
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "jest": "^26.6.3",
+    "nodemon": "^2.0.7"
+  }
 }

@@ -4,6 +4,9 @@ public/videos/
 # main.pug is runtime generated from main.dwt
 views/main.pug
 
+# Reports of Test Coverage
+tests/coverage
+
 # Logs
 logs
 *.log

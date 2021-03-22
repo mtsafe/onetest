@@ -14,14 +14,34 @@ router.use('/', (req, res, next) => {
   next()
 });
 
+/*
+* The /users API returning HTML:
+* The Requests are verbs; the Routes are nouns.
+* REQUEST ROUTE
+* -- Private Requests for Forms --
+* 1 GET     /users/1taat_login_form   Display the form to login
+* 2 GET     /users/1taat_login_register  Display the form to register a user
+* -- Private Action Requests --
+* 3 POST    /users/register     Add a new user
+* 4 POST    /users/login     Authenticate a user
+* 5 GET     /users/logout    Authenticate a user
+*/
+
 // Login Page
-router.get('/users/login', forwardAuthenticated, (req, res) => res.render('login'));
+router.get('/users/1taat_login_form', forwardAuthenticated, (req, res) => {
+  console.log('1. GET to '+req.url);
+  res.render('su_login');
+});
 
 // Register Page
-router.get('/users/register', forwardAuthenticated, (req, res) => res.render('register'));
+router.get('/users/1taat_login_register', forwardAuthenticated, (req, res) => {
+  console.log('2. GET to '+req.url);
+  res.render('su_register');
+});
 
 // Register
 router.post('/users/register', (req, res) => {
+  console.log('3. POST to '+req.url);
   const { name, email, password, password2 } = req.body;
   let errors = [];
 
@@ -38,7 +58,7 @@ router.post('/users/register', (req, res) => {
   }
 
   if (errors.length > 0) {
-    res.render('register', {
+    res.render('su_register', {
       errors,
       name,
       email,
@@ -49,7 +69,7 @@ router.post('/users/register', (req, res) => {
     User.findOne({ email: email }).then(user => {
       if (user) {
         errors.push({ msg: 'Email already exists' });
-        res.render('register', {
+        res.render('su_register', {
           errors,
           name,
           email,
@@ -74,7 +94,7 @@ router.post('/users/register', (req, res) => {
                   'success_msg',
                   'You are now registered and can log in'
                 );
-                res.redirect('/users/login');
+                res.redirect('/users/1taat_login_form');
               })
               .catch(err => console.log(err));
           });
@@ -86,18 +106,20 @@ router.post('/users/register', (req, res) => {
 
 // Login
 router.post('/users/login', (req, res, next) => {
+  console.log('4. POST to '+req.url);
   passport.authenticate('local', {
     successRedirect: '/blogs',
-    failureRedirect: '/users/login',
+    failureRedirect: '/users/1taat_login_form',
     failureFlash: true
   })(req, res, next);
 });
 
 // Logout
 router.get('/users/logout', (req, res) => {
+  console.log('5. GET to '+req.url);
   req.logout();
   req.flash('success_msg', 'You are logged out');
-  res.redirect('/users/login');
+  res.redirect('/users/1taat_login_form');
 });
 
 module.exports = router;

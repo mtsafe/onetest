@@ -3,6 +3,7 @@ const {
   ensureAuthenticated,
   forwardAuthenticated,
 } = require('../controllers/auth')
+let Blog = require('../models/blog_db')
 
 // 1 Provide the listing of all blogs
 function displayBlogsList(req, res, next) {
@@ -27,9 +28,9 @@ function displayBlogsList(req, res, next) {
 }
 
 // 2 Provide a single blog document
-function displayBlogsList(req, res, next) {
-  let ID = req.params.id.substring(1)
+function displayABlog(req, res, next) {
   console.log('2. GET to ' + req.url)
+  let ID = req.params.id.substring(1)
   if (!ID.match(/^[0-9a-fA-F]{24}$/)) {
     console.log(`"${ID}" invalid ObjectId, cannot findById`)
     console.log(
@@ -79,8 +80,8 @@ function addABlog(req, res, next) {
 
 // 4 Update a single blog document
 function updateABlog(req, res, next) {
-  let ID = req.params.id.substring(1)
   console.log(`4. PUT to ${req.url}; FormData:` + JSON.stringify(req.body))
+  let ID = req.params.id.substring(1)
   if (!req.isAuthenticated()) {
     // post an alert
     console.log('user is not logged in to do edit')
@@ -107,8 +108,8 @@ function updateABlog(req, res, next) {
 
 // 5 Delete a single blog document
 function deleteABlog(req, res, next) {
-  let ID = req.params.id.substring(1)
   console.log(`5. DELETE to ${req.url}; FormData:` + JSON.stringify(req.body))
+  let ID = req.params.id.substring(1)
   if (!req.isAuthenticated()) {
     // post an alert
     console.log('user is not logged in to do delete')
@@ -214,6 +215,7 @@ function displayDeleteABlogForm(req, res, next) {
 
 module.exports = {
   displayBlogsList,
+  displayABlog,
   addABlog,
   updateABlog,
   deleteABlog,

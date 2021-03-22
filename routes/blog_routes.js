@@ -4,6 +4,7 @@ const path = require('path')
 const dwt2pug = require('../services/dwt2pug.service')
 const {
   displayBlogsList,
+  displayABlog,
   addABlog,
   updateABlog,
   deleteABlog,
@@ -15,8 +16,6 @@ const {
   forwardAuthenticated,
 } = require('../controllers/blog.controller.js')
 
-// Bring in DB Models
-let Blog = require('../models/blog_db')
 // const { config } = require('bluebird');
 
 /*
@@ -41,7 +40,7 @@ let Blog = require('../models/blog_db')
 router.use('/', restoreMountPoint)
 
 router.get('/blogs', displayBlogsList)
-router.get('/blogs/api:id', displayBlogsList)
+router.get('/blogs/api:id', displayABlog)
 router.post('/blogs', addABlog)
 router.put('/blogs/api:id', updateABlog)
 router.delete('/blogs/api:id', deleteABlog)

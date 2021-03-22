@@ -1,4 +1,6 @@
 const { restoreMountPoint } = require('../controllers/auth')
+const bcrypt = require('bcryptjs')
+const passport = require('passport')
 const User = require('../models/user_db')
 
 function displayLoginForm(req, res, next) {

@@ -1,4 +1,5 @@
-const controllersAuth = require('../controllers/auth')
+const { restoreMountPoint } = require('../controllers/auth')
+const User = require('../models/user_db')
 
 function displayLoginForm(req, res, next) {
   console.log('1. GET to ' + req.url)
@@ -106,4 +107,6 @@ module.exports = {
   registerThisUser,
   startUserSession,
   endUserSession,
+  restoreMountPoint,
+  User,
 }

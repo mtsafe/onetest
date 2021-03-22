@@ -2,23 +2,14 @@ const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcryptjs')
 const passport = require('passport')
-// Load User model
-const User = require('../models/user_db')
 const {
   displayLoginForm,
   displayRegistrationForm,
   registerThisUser,
   startUserSession,
   endUserSession,
+  restoreMountPoint,
 } = require('../controllers/user.controller.js')
-
-// Restore the mount point into the url
-router.use('/', (req, res, next) => {
-  req.baseUrl = '/'
-  req.url = req.originalUrl
-  // whereAmI("New Location?", req);
-  next()
-})
 
 /*
  * The /users API returning HTML:
@@ -32,6 +23,9 @@ router.use('/', (req, res, next) => {
  * 4 POST    /users/login     Start a user session
  * 5 GET     /users/logout    End a user session
  */
+
+// Restore the mount point into the url
+router.use('/', restoreMountPoint)
 
 router.get('/users/1taat_login_form', displayLoginForm)
 router.get('/users/1taat_login_register', displayRegistrationForm)

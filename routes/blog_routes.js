@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const dwt2pug = require('../services/dwt2pug.service');
-const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
+const { ensureAuthenticated, forwardAuthenticated } = require('../controllers/auth');
 
 /*
 function whereAmI(calling, {url, originalUrl, baseUrl, path}) {
@@ -182,7 +182,8 @@ router.get('/blogs/1taat_login_form', (req,res) => {
 });
 
 // 7 Display the form to add a new blog
-router.get('/blogs/1taat_add_form', (req, res) => {
+// router.get('/blogs/1taat_add_form', (req, res) => {
+router.get('/blogs/1taat_add_form', ensureAuthenticated, (req, res) => {
   console.log('7. GET to '+req.url);
   let isUserLoggedIn = true;
   if (!isUserLoggedIn) {

@@ -4,7 +4,8 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 // Load User model
 const User = require('../models/user_db');
-const { forwardAuthenticated } = require('../config/auth');
+const { forwardAuthenticated } = require('../controllers/auth');
+const { displayLoginForm } = require('../controllers/user.controller.js');
 
 // Restore the mount point into the url
 router.use('/', (req, res, next) => {
@@ -28,10 +29,11 @@ router.use('/', (req, res, next) => {
 */
 
 // Login Page
-router.get('/users/1taat_login_form', forwardAuthenticated, (req, res) => {
-  console.log('1. GET to '+req.url);
-  res.render('su_login');
-});
+// router.get('/users/1taat_login_form', forwardAuthenticated, (req, res) => {
+//   console.log('1. GET to '+req.url);
+//   res.render('su_login');
+// });
+router.get('/users/1taat_login_form', displayLoginForm);
 
 // Register Page
 router.get('/users/1taat_login_register', forwardAuthenticated, (req, res) => {

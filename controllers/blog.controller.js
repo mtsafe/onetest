@@ -56,7 +56,7 @@ function displayABlog(req, res, next) {
 function addABlog(req, res, next) {
   console.log(`3. POST to ${req.url}; FormData:` + JSON.stringify(req.body))
   if (!req.isAuthenticated()) {
-    // post an alert
+    req.flash('error_msg', 'You are not logged in to add a blog')
     console.log('user is not logged in to do add')
     res
       .status(401)
@@ -82,7 +82,7 @@ function updateABlog(req, res, next) {
   console.log(`4. PUT to ${req.url}; FormData:` + JSON.stringify(req.body))
   let ID = req.params.id.substring(1)
   if (!req.isAuthenticated()) {
-    // post an alert
+    req.flash('error_msg', 'You are not logged in to edit a blog')
     console.log('user is not logged in to do edit')
     res
       .status(401)
@@ -110,7 +110,7 @@ function deleteABlog(req, res, next) {
   console.log(`5. DELETE to ${req.url}; FormData:` + JSON.stringify(req.body))
   let ID = req.params.id.substring(1)
   if (!req.isAuthenticated()) {
-    // post an alert
+    req.flash('error_msg', 'You are not logged in to delete a blog')
     console.log('user is not logged in to do delete')
     res
       .status(401)
@@ -137,7 +137,7 @@ function deleteABlog(req, res, next) {
 function displayAddABlogForm(req, res, next) {
   console.log('7. GET to ' + req.url)
   if (!req.isAuthenticated()) {
-    // post an alert
+    req.flash('error_msg', 'You are not logged in to add a blog')
     console.log('user is not logged in to do add')
     res
       .status(401)
@@ -155,7 +155,7 @@ function displayUpdateABlogForm(req, res, next) {
   console.log('8. GET to ' + req.url)
   let ID = req.params.id.substring(1)
   if (!req.isAuthenticated()) {
-    // post an alert
+    req.flash('error_msg', 'You are not logged in to edit a blog')
     console.log('user is not logged in to do edit')
     res
       .status(401)
@@ -182,7 +182,7 @@ function displayDeleteABlogForm(req, res, next) {
   console.log('9. GET to ' + req.url)
   let ID = req.params.id.substring(1)
   if (!req.isAuthenticated()) {
-    // post an alert
+    req.flash('error_msg', 'You are not logged in to delete a blog')
     console.log('user is not logged in to do delete')
     res
       .status(401)
@@ -204,7 +204,6 @@ function displayDeleteABlogForm(req, res, next) {
       console.log(err)
       return
     }
-    // console.log(blog);
     res.render('su_delete_blog', {
       page_title: 'Blog',
       blog: blog,

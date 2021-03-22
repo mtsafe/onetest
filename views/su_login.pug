@@ -3,3 +3,31 @@ extends main
 block Content
   #bg-white
     h1 #{page_title} LOGIN
+.row.mt-5
+  .col-md-6.m-auto
+    .card.card-body
+      h1.text-center.mb-3
+        i.fas.fa-sign-in-alt  Login
+      include ./includes/messages
+      form(action="/users/login" method="POST")
+        .form-group
+          label(for="email") Email
+          input(
+            type="email"
+            id="email"
+            name="email"
+            class="form-control"
+            placeholder="Enter Email"
+          )
+        .form-group
+          label(for="password") Password
+          input(
+            type="password"
+            id="password"
+            name="password"
+            class="form-control"
+            placeholder="Enter Password"
+          )
+        button(type="submit" class="btn btn-primary btn-block") Login
+      p.lead.mt-4 No Account?
+        a(href="/users/register") Register

@@ -3,7 +3,9 @@ const dotenv = require('dotenv');
 const express = require('express');
 const methodOverride = require('method-override');
 const path = require('path');
-// const bodyParser = require('body-parser')
+const passport = require('passport');
+const flash = require('connect-flash');
+const session = require('express-session');
 
 // Configuring the App
 dotenv.config({ path: './config/config.env'});
@@ -23,9 +25,32 @@ app.set('view engine', 'pug');
 // parse application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 // parse application/json
-// Parse JSON bodies for this app. Make sure you put
-// `app.use(express.json())` **before** your route handlers!
 app.use(express.json());
+
+// Express session
+app.use(
+  session({
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: true
+  })
+);
+
+// Passport middleware
+require('./config/passport')(passport);
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Connect flash
+app.use(flash());
+
+// Global variables
+app.use(function(req, res, next) {
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  res.locals.error = req.flash('error');
+  next();
+});
 
 // Method Override allows PUT and DELETE
 app.use(methodOverride(function (req, res) {
@@ -37,8 +62,9 @@ app.use(methodOverride(function (req, res) {
   }
 }));
 
-// Routes
+// Authenticated Routes
 app.use('/blogs', require('./routes/blog_routes'));
+app.use('/users', require('./routes/user_routes.js'));
 
 // Lastly, 404
 app.use((req, res) => {

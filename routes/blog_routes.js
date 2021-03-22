@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const dwt2pug = require('../services/dwt2pug.service');
+const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
 
 /*
 function whereAmI(calling, {url, originalUrl, baseUrl, path}) {
@@ -21,14 +22,8 @@ router.use('/', (req, res, next) => {
   next()
 });
 
-// // Dashboard
-// router.get('/dashboard', (req,res) => {
-//   console.log('GET to /blogs/dashboard');
-//   res.render('dashboard');
-// });
-
 // Bring in DB Models
-let Blog = require('../models/blog.db');
+let Blog = require('../models/blog_db');
 // const { config } = require('bluebird');
 
 /*

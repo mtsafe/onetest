@@ -13,7 +13,6 @@ const {
   displayDeleteABlogForm,
   restoreMountPoint,
   ensureAuthenticated,
-  forwardAuthenticated,
 } = require('../controllers/blog.controller.js')
 
 // const { config } = require('bluebird');

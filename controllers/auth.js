@@ -21,15 +21,15 @@ function ensureAuthenticated(req, res, next) {
   res.redirect('/users/1taat_login_form')
 }
 
-function forwardAuthenticated(req, res, next) {
-  if (!req.isAuthenticated()) {
-    return next()
-  }
-  res.redirect('/blogs')
-}
+// function forwardAuthenticated(req, res, next) {
+//   if (!req.isAuthenticated()) {
+//     return next()
+//   }
+//   res.redirect('/blogs')
+// }
 
 module.exports = {
   restoreMountPoint,
   ensureAuthenticated,
-  forwardAuthenticated,
+  //  forwardAuthenticated,
 }

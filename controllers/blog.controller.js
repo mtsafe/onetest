@@ -1,7 +1,6 @@
 const {
   restoreMountPoint,
   ensureAuthenticated,
-  forwardAuthenticated,
 } = require('../controllers/auth')
 let Blog = require('../models/blog_db')
 
@@ -225,5 +224,4 @@ module.exports = {
   // Passed from controllers/auth.js
   restoreMountPoint,
   ensureAuthenticated,
-  forwardAuthenticated,
 }

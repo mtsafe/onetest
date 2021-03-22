@@ -2,7 +2,9 @@ extends main
 
 block Content
   #bg-white
-    h1 #{page_title}
+    h1 #{page_title} BLOG LISTING
+      form(method='GET', action='/users/logout', enctype='application/json')
+        input(type="submit", value="Logout")
       ul.list-group
         each blog, i in blogs
           li.list-group-item #{blog.title} click to 

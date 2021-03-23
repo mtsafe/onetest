@@ -59,7 +59,18 @@ function insertPugBlocks(pug) {
   return pugOut.join('\n')
 }
 
-module.exports = function (dwtFilePath, pugFilePath) {
+function fileOlderThanFile(dwtFilePath, pugFilePath) {
+  const dwtStats = fs.statSync(dwtFilePath)
+  try {
+    const pugStats = fs.statSync(pugFilePath)
+    console.log(`${dwtStats.mtime} < ${pugStats.mtime}`)
+    return dwtStats.mtime < pugStats.mtime
+  } catch (e) {
+    return false
+  }
+}
+
+function dwt2pug(dwtFilePath, pugFilePath) {
   try {
     if (!fsPromises.access(dwtFilePath, fs.constants.R_OK)) {
       console.log(`Missing file ${dwtFilePath}`)
@@ -70,6 +81,7 @@ module.exports = function (dwtFilePath, pugFilePath) {
     console.error(err)
     return
   }
+  if (fileOlderThanFile(dwtFilePath, pugFilePath)) return
   console.log(`Converting Dreamweaver Template file ${dwtFilePath} to HTML...`)
   try {
     fs.readFile(dwtFilePath, 'utf8', (err, data) => {
@@ -98,3 +110,5 @@ module.exports = function (dwtFilePath, pugFilePath) {
   }
   console.log(`Template file ${dwtFilePath} converted.`)
 }
+
+module.exports = dwt2pug

@@ -1,7 +1,6 @@
 const express = require('express')
 const router = express.Router()
 const path = require('path')
-const dwt2pug = require('../services/dwt2pug.service')
 const {
   displayBlogsList,
   displayABlog,

@@ -1,7 +1,10 @@
 extends main
 
+include ./includes/doctitle
+
 block Content
   #bg-white
+    h1= page_title
     h3 Are you sure you want to delete this blog post?
     form(method='GET', action='/blogs', enctype='application/json')
       input(type="submit", value="Keep It")
@@ -9,7 +12,6 @@ block Content
       input(type="hidden", name="_method", value="DELETE")
       input(type="submit", value="Delete It")
     hr
-    h1= page_title
     h2= blog.title
     | Written by #{blog.author}
     hr

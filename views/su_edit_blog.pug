@@ -1,8 +1,11 @@
 extends main
 
+include ./includes/doctitle
+
 block Content
   #bg-white
-    h1= page_title+": "+blog.title
+    h1= page_title
+    h2= blog.title
     form(method='GET', action='/blogs', enctype='application/json')
       input(type="submit", value="Return Without Changes")
     form(method='POST', action='/blogs/api:'+blog._id, enctype='application/json')

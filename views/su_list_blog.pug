@@ -1,8 +1,12 @@
 extends main
 
+include ./includes/doctitle
+
 block Content
   #bg-white
-    h1 #{page_title} BLOG LISTING
+    h1= page_title
+      form(method='GET', action='/blogs/1taat_add_form', enctype='application/json')
+        input(type="submit", value="Add a New Blog")
       form(method='GET', action='/users/logout', enctype='application/json')
         input(type="submit", value="Logout")
       ul.list-group

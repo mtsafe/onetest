@@ -1,8 +1,10 @@
 extends main
 
+include ./includes/doctitle
+
 block Content
   #bg-white
-    h1 #{page_title} BLOG LISTING
+    h1= page_title
       ul.list-group
         each blog, i in blogs
           li.list-group-item

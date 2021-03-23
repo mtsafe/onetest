@@ -8,14 +8,18 @@ function displayLoginForm(req, res, next) {
   if (req.isAuthenticated()) {
     res.redirect('/blogs')
   } else {
-    res.render('su_login')
+    res.render('su_login', {
+      page_title: 'Login',
+    })
   }
 }
 
 function displayRegistrationForm(req, res, next) {
   console.log('2. GET to ' + req.url)
   if (req.isAuthenticated()) {
-    res.render('su_register')
+    res.render('su_register', {
+      page_title: 'Register a New User',
+    })
   } else {
     req.flash(
       'error_msg',
@@ -43,6 +47,7 @@ function registerThisUser(req, res, next) {
   }
   if (errors.length > 0) {
     res.render('su_register', {
+      page_title: 'Register a New User',
       errors,
       name,
       email,
@@ -54,6 +59,7 @@ function registerThisUser(req, res, next) {
       if (user) {
         errors.push({ msg: 'Email already exists' })
         res.render('su_register', {
+          page_title: 'Register a New User',
           errors,
           name,
           email,

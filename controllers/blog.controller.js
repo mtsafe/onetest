@@ -2,6 +2,7 @@ const {
   restoreMountPoint,
   ensureAuthenticated,
 } = require('../controllers/auth')
+const dwt2pug = require('../services/dwt2pug.service')
 let Blog = require('../models/blog_db')
 
 // 1 Provide the listing of all blogs
@@ -14,13 +15,13 @@ function displayBlogsList(req, res, next) {
     }
     if (req.isAuthenticated()) {
       res.render('su_list_blog', {
-        page_title: 'Blogs',
+        page_title: 'List of Blogs',
         blogs: blogs,
       })
       return
     }
     res.render('list_blog', {
-      page_title: 'Blogs',
+      page_title: 'List of Blogs',
       blogs: blogs,
     })
   })
@@ -32,12 +33,14 @@ function displayABlog(req, res, next) {
   let ID = req.params.id.substring(1)
   if (!ID.match(/^[0-9a-fA-F]{24}$/)) {
     console.log(`"${ID}" invalid ObjectId, cannot findById`)
-    console.log(
-      `Sending 404: ${path.join(__dirname + '/public/error/404page.html')}`,
-    )
+    // console.log(
+    //   `Sending 404: ${path.join(__dirname + '/public/error/404page.html')}`,
+    // )
+    console.log(`Sending 404: ${__dirname + '/../public/error/404page.html'}`)
     res
       .status(404)
-      .sendFile(path.join(__dirname + '/public/error/404page.html'))
+      //      .sendFile(path.join(__dirname + '/public/error/404page.html'))
+      .redirect('/null')
     return
   }
   Blog.findById(ID, (err, blog) => {
@@ -46,7 +49,7 @@ function displayABlog(req, res, next) {
       return
     }
     res.render('view_blog', {
-      page_title: 'Blog',
+      page_title: 'Viewing a Blog',
       blog: blog,
     })
   })
@@ -171,7 +174,7 @@ function displayUpdateABlogForm(req, res, next) {
       return
     }
     res.render('su_edit_blog', {
-      page_title: 'Edit Blog',
+      page_title: 'Editing a Blog Article',
       blog: blog,
     })
   })
@@ -205,7 +208,7 @@ function displayDeleteABlogForm(req, res, next) {
       return
     }
     res.render('su_delete_blog', {
-      page_title: 'Blog',
+      page_title: 'Deleting a Blog Article',
       blog: blog,
     })
   })

@@ -15,7 +15,7 @@
   },
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon -e html,js,pug",
-    "start": "cross-env NODE_ENV=production node",
+    "start": "cross-env NODE_ENV=production node server.js",
     "test": "jest --config=./config/jest.config.js"
   },
   "dependencies": {

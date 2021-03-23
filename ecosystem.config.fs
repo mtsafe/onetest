@@ -2,6 +2,8 @@ module.exports = {
   apps : [{
     name: 'onetest',
     script: 'server.js',
+    error_file: 'onetest_err.log',
+    out_file: 'onetest_out.log',
     watch: '.',
     increment_var: 'PORT',
     env: {

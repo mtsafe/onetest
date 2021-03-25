@@ -1,6 +1,7 @@
 const {
   restoreMountPoint,
   ensureAuthenticated,
+  isGoodObjectId,
 } = require('../controllers/auth')
 const dwt2pug = require('../services/dwt2pug.service')
 let Blog = require('../models/blog_db')
@@ -190,15 +191,6 @@ function displayDeleteABlogForm(req, res, next) {
       blog: blog,
     })
   })
-}
-
-// Supporting functions
-function isGoodObjectId(objectId, req, res) {
-  if (objectId.match(/^[0-9a-fA-F]{24}$/)) return true
-  console.log(`"${objectId}" invalid ObjectId, cannot findById`)
-  console.log(`Sending 404: ${__dirname + '/../public/error/404page.html'}`)
-  res.status(404).redirect('/error/404page.html')
-  return false
 }
 
 module.exports = {

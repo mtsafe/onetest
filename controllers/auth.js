@@ -28,8 +28,17 @@ function ensureAuthenticated(req, res, next) {
 //   res.redirect('/blogs')
 // }
 
+function isGoodObjectId(objectId, req, res) {
+  if (objectId.match(/^[0-9a-fA-F]{24}$/)) return true
+  console.log(`"${objectId}" invalid ObjectId, cannot findById`)
+  console.log(`Sending 404: ${__dirname + '/../public/error/404page.html'}`)
+  res.status(404).redirect('/error/404page.html')
+  return false
+}
+
 module.exports = {
   restoreMountPoint,
   ensureAuthenticated,
   //  forwardAuthenticated,
+  isGoodObjectId,
 }

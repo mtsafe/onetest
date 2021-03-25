@@ -1,13 +1,11 @@
-// 2 more functional tests to be implemented
+// functional test suite to be implemented
 //    Test for fileOlderThanFile() requires setting the date of test files
-//    Test for dwt2pug() requires input file and actual output file
 const {
   toTitleCase,
   html2pugWorkaround,
   insertPugBlocks,
   fileOlderThanFile,
-  dwt2pug,
-} = require('./dwt2pug.service.unit')
+} = require('./dwt2pug.util')
 
 describe('toTitleCase(): Checking conversion to title-case', () => {
   test('No change conversion', () => {

@@ -31,18 +31,7 @@ function displayBlogsList(req, res, next) {
 function displayABlog(req, res, next) {
   console.log('2. GET to ' + req.url)
   let ID = req.params.id.substring(1)
-  if (!ID.match(/^[0-9a-fA-F]{24}$/)) {
-    console.log(`"${ID}" invalid ObjectId, cannot findById`)
-    // console.log(
-    //   `Sending 404: ${path.join(__dirname + '/public/error/404page.html')}`,
-    // )
-    console.log(`Sending 404: ${__dirname + '/../public/error/404page.html'}`)
-    res
-      .status(404)
-      //      .sendFile(path.join(__dirname + '/public/error/404page.html'))
-      .redirect('/null')
-    return
-  }
+  if (!isGoodObjectId(ID, req, res)) return
   Blog.findById(ID, (err, blog) => {
     if (err) {
       console.log(err)
@@ -156,7 +145,6 @@ function displayAddABlogForm(req, res, next) {
 // 7 Display the form to update a blog
 function displayUpdateABlogForm(req, res, next) {
   console.log('8. GET to ' + req.url)
-  let ID = req.params.id.substring(1)
   if (!req.isAuthenticated()) {
     req.flash('error_msg', 'You are not logged in to edit a blog')
     console.log('user is not logged in to do edit')
@@ -165,10 +153,9 @@ function displayUpdateABlogForm(req, res, next) {
       .sendFile(path.join(__dirname + '/public/error/401page.html'))
     return
   }
+  let ID = req.params.id.substring(1)
+  if (!isGoodObjectId(ID, req, res)) return
   Blog.findById(ID, (err, blog) => {
-    if (!ID.match(/^[0-9a-fA-F]{24}$/)) {
-      console.log(`"${ID}" invalid ObjectId, cannot findById`)
-    }
     if (err) {
       console.log(err)
       return
@@ -183,7 +170,6 @@ function displayUpdateABlogForm(req, res, next) {
 // 8 Display the form to delete a blog
 function displayDeleteABlogForm(req, res, next) {
   console.log('9. GET to ' + req.url)
-  let ID = req.params.id.substring(1)
   if (!req.isAuthenticated()) {
     req.flash('error_msg', 'You are not logged in to delete a blog')
     console.log('user is not logged in to do delete')
@@ -192,16 +178,8 @@ function displayDeleteABlogForm(req, res, next) {
       .sendFile(path.join(__dirname + '/public/error/401page.html'))
     return
   }
-  if (!ID.match(/^[0-9a-fA-F]{24}$/)) {
-    console.log(`"${ID}" invalid ObjectId, cannot findById`)
-    console.log(
-      `Sending 404: ${path.join(__dirname + '/public/error/404page.html')}`,
-    )
-    res
-      .status(404)
-      .sendFile(path.join(__dirname + '/public/error/404page.html'))
-    return
-  }
+  let ID = req.params.id.substring(1)
+  if (!isGoodObjectId(ID, req, res)) return
   Blog.findById(ID, (err, blog) => {
     if (err) {
       console.log(err)
@@ -212,6 +190,15 @@ function displayDeleteABlogForm(req, res, next) {
       blog: blog,
     })
   })
+}
+
+// Supporting functions
+function isGoodObjectId(objectId, req, res) {
+  if (objectId.match(/^[0-9a-fA-F]{24}$/)) return true
+  console.log(`"${objectId}" invalid ObjectId, cannot findById`)
+  console.log(`Sending 404: ${__dirname + '/../public/error/404page.html'}`)
+  res.status(404).redirect('/error/404page.html')
+  return false
 }
 
 module.exports = {

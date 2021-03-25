@@ -7,8 +7,11 @@ views/main.pug
 # Not using ejs; just have them for reference
 *.ejs
 
-# Reports of Test Coverage
-tests/coverage
+# Test directory
+tests/coverage/*
+!tests/coverage/.null
+tests/output/*
+!tests/output/.null
 
 # Logs
 logs

@@ -2,6 +2,7 @@ const {
   restoreMountPoint,
   ensureAuthenticated,
   isGoodObjectId,
+  checkAuthenticationToGetForm,
 } = require('../controllers/auth')
 const dwt2pug = require('../services/dwt2pug.service')
 let Blog = require('../models/blog_db')
@@ -129,14 +130,7 @@ function deleteABlog(req, res, next) {
 // 6 Display the form to add a new blog
 function displayAddABlogForm(req, res, next) {
   console.log('7. GET to ' + req.url)
-  if (!req.isAuthenticated()) {
-    req.flash('error_msg', 'You are not logged in to add a blog')
-    console.log('user is not logged in to do add')
-    res
-      .status(401)
-      .sendFile(path.join(__dirname + '/public/error/401page.html'))
-    return
-  }
+  checkAuthenticationToGetForm(req, res)
   dwt2pug('./Templates/main.dwt', './views/main.pug')
   res.render('su_add_blog', {
     page_title: 'Adding A Blog Article',
@@ -146,14 +140,7 @@ function displayAddABlogForm(req, res, next) {
 // 7 Display the form to update a blog
 function displayUpdateABlogForm(req, res, next) {
   console.log('8. GET to ' + req.url)
-  if (!req.isAuthenticated()) {
-    req.flash('error_msg', 'You are not logged in to edit a blog')
-    console.log('user is not logged in to do edit')
-    res
-      .status(401)
-      .sendFile(path.join(__dirname + '/public/error/401page.html'))
-    return
-  }
+  checkAuthenticationToGetForm(req, res)
   let ID = req.params.id.substring(1)
   if (!isGoodObjectId(ID, req, res)) return
   Blog.findById(ID, (err, blog) => {
@@ -171,14 +158,7 @@ function displayUpdateABlogForm(req, res, next) {
 // 8 Display the form to delete a blog
 function displayDeleteABlogForm(req, res, next) {
   console.log('9. GET to ' + req.url)
-  if (!req.isAuthenticated()) {
-    req.flash('error_msg', 'You are not logged in to delete a blog')
-    console.log('user is not logged in to do delete')
-    res
-      .status(401)
-      .sendFile(path.join(__dirname + '/public/error/401page.html'))
-    return
-  }
+  checkAuthenticationToGetForm(req, res)
   let ID = req.params.id.substring(1)
   if (!isGoodObjectId(ID, req, res)) return
   Blog.findById(ID, (err, blog) => {

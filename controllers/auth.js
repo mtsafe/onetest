@@ -13,6 +13,11 @@ function restoreMountPoint(req, res, next) {
   next()
 }
 
+/*
+ * Unauthenticated GET for a form will return 404 Not Found.
+ * Unauthenticated Private Action Requests will return 401 Unauthorized.
+ */
+
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next()
@@ -36,9 +41,17 @@ function isGoodObjectId(objectId, req, res) {
   return false
 }
 
+function checkAuthenticationToGetForm(req, res) {
+  if (req.isAuthenticated()) return true
+  req.flash('error_msg', 'You are not logged in to do blogging')
+  console.log('user is not logged in to use form')
+  res.status(401).redirect('/users/1taat_login_form')
+}
+
 module.exports = {
   restoreMountPoint,
   ensureAuthenticated,
   //  forwardAuthenticated,
   isGoodObjectId,
+  checkAuthenticationToGetForm,
 }

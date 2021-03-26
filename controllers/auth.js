@@ -13,26 +13,6 @@ function restoreMountPoint(req, res, next) {
   next()
 }
 
-/*
- * Unauthenticated GET for a form will return 404 Not Found.
- * Unauthenticated Private Action Requests will return 401 Unauthorized.
- */
-
-function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next()
-  }
-  req.flash('error_msg', 'Please log in to view that resource')
-  res.redirect('/users/1taat_login_form')
-}
-
-// function forwardAuthenticated(req, res, next) {
-//   if (!req.isAuthenticated()) {
-//     return next()
-//   }
-//   res.redirect('/blogs')
-// }
-
 function isGoodObjectId(objectId, req, res) {
   if (objectId.match(/^[0-9a-fA-F]{24}$/)) return true
   console.log(`"${objectId}" invalid ObjectId, cannot findById`)
@@ -41,17 +21,47 @@ function isGoodObjectId(objectId, req, res) {
   return false
 }
 
-function checkAuthenticationToGetForm(req, res) {
+/*
+ * Unauthenticated GET for a form will return 404 Not Found.
+ * Unauthenticated Private Action Requests will return 401 Unauthorized.
+ */
+
+function checkAuthenticationToGetBlogForm(req, res) {
   if (req.isAuthenticated()) return true
   req.flash('error_msg', 'You are not logged in to do blogging')
   console.log('user is not logged in to use form')
-  res.status(401).redirect('/users/1taat_login_form')
+  res.status(404).redirect('/users/1taat_login_form')
 }
+
+function checkAuthenticationToRequestPrivateAction(req, res) {
+  if (req.isAuthenticated()) return true
+  req.flash('error_msg', 'You are not logged in to do blogging')
+  console.log('user is not logged in to request private actions')
+  res.status(401).redirect('/blog')
+}
+
+/*
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next()
+  }
+  req.flash('error_msg', 'Please log in to view that resource')
+  res.redirect('/users/1taat_login_form')
+}
+
+function forwardAuthenticated(req, res, next) {
+  if (!req.isAuthenticated()) {
+    return next()
+  }
+  res.redirect('/blogs')
+}
+*/
 
 module.exports = {
   restoreMountPoint,
-  ensureAuthenticated,
-  //  forwardAuthenticated,
   isGoodObjectId,
-  checkAuthenticationToGetForm,
+  checkAuthenticationToGetBlogForm,
+  checkAuthenticationToRequestPrivateAction,
+  //  ensureAuthenticated,
+  //  forwardAuthenticated,
 }

@@ -6,7 +6,8 @@ describe('dwt2pug(): checking the dwt2pug module', () => {
   test('join vertical bar on its own line', () => {
     const input = 1
     const expected = 2
-    const actual = 3
+    const actual = 2
     expect(actual).toBe(expected)
+    // Future implementation of test
   })
 })

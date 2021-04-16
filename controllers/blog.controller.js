@@ -49,7 +49,7 @@ function displayABlog(req, res, next) {
 // 3 Add a new blog document
 function addABlog(req, res, next) {
   console.log(`3. POST to ${req.url}; FormData:` + JSON.stringify(req.body))
-  checkAuthenticationToRequestPrivateAction()
+  checkAuthenticationToRequestPrivateAction(req, res)
   let blog = new Blog()
   blog.title = req.body.title
   blog.author = req.body.author
@@ -68,7 +68,7 @@ function addABlog(req, res, next) {
 function updateABlog(req, res, next) {
   console.log(`4. PUT to ${req.url}; FormData:` + JSON.stringify(req.body))
   let ID = req.params.id.substring(1)
-  checkAuthenticationToRequestPrivateAction()
+  checkAuthenticationToRequestPrivateAction(req, res)
   let blog = {}
   blog.title = req.body.title
   blog.author = req.body.author
@@ -89,7 +89,7 @@ function updateABlog(req, res, next) {
 function deleteABlog(req, res, next) {
   console.log(`5. DELETE to ${req.url}; FormData:` + JSON.stringify(req.body))
   let ID = req.params.id.substring(1)
-  checkAuthenticationToRequestPrivateAction()
+  checkAuthenticationToRequestPrivateAction(req, res)
   let blog = {}
   blog.title = req.body.title
   blog.author = req.body.author

@@ -70,6 +70,7 @@ function fileOlderThanFile(dwtFilePath, pugFilePath) {
 }
 
 module.exports = {
+  html2pug,
   toTitleCase,
   html2pugWorkaround,
   insertPugBlocks,

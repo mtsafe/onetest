@@ -1,4 +1,5 @@
 const {
+  html2pug,
   html2pugWorkaround,
   insertPugBlocks,
   fileOlderThanFile,

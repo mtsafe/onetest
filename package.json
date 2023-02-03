@@ -40,7 +40,7 @@
     "mongoose-legacy-pluralize": "^1.0.2",
     "mpath": "^0.8.3",
     "mquery": "^3.2.4",
-    "passport": "^0.4.1",
+    "passport": "^0.6.0",
     "passport-local": "^1.0.0",
     "process-nextick-args": "^2.0.1",
     "pug": "^3.0.2",

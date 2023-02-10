@@ -38,7 +38,7 @@
     "mongodb": "^3.6.4",
     "mongoose": "^5.11.15",
     "mongoose-legacy-pluralize": "^1.0.2",
-    "mpath": "^0.8.3",
+    "mpath": "^0.8.4",
     "mquery": "^3.2.4",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
